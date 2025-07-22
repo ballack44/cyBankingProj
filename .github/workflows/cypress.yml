@@ -22,4 +22,18 @@ jobs:
 
       - name: Run Cypress tests
         run: npx cypress run
+         
+      - name: Upload screenshots (if any)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload videos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
 
