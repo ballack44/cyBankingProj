@@ -10,6 +10,10 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        browser: [chrome, firefox, electron]
 
     container: cypress/included:12.17.4  # Use any Cypress-included Docker image
 
@@ -20,20 +24,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Cypress tests
-        run: npx cypress run
+      - name: Run Cypress tests ${{ matrix.browser }}
+        run: npx cypress run --browser ${{ matrix.browser }}
          
-      - name: Upload screenshots (if any)
+      - name: Upload screenshots (if any) (${{ matrix.browser }})
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cypress-screenshots
+          name: cypress-screenshots-${{ matrix.browser }}
           path: cypress/screenshots
 
-      - name: Upload videos
+      - name: Upload videos (${{ matrix.browser }})
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cypress-videos
+          name: cypress-videos-${{ matrix.browser }}
           path: cypress/videos
 
