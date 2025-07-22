@@ -13,7 +13,7 @@ jobs:
     
     strategy:
       matrix:
-        browser: [chrome, firefox, electron]
+        browser: [chrome, edge, electron]
 
     container: cypress/included:12.17.4  # Use any Cypress-included Docker image
 
