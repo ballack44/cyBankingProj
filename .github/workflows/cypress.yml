@@ -1,2 +1,23 @@
-- name: Cypress.io
-  uses: cypress-io/github-action@v6.10.1
+name: Run Cypress Tests in Docker
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    container: cypress/included:12.17.4  # Use any Cypress-included Docker image
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests
+        run: npx cypress run
