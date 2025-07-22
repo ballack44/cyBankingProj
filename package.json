@@ -1,12 +1,11 @@
 {
-  "name": "my-cypress-project",
+  "name": "banking-tests",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress run",
+    "cypress:open": "cypress open"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "devDependencies": {
+    "cypress": "^12.17.4"
+  }
 }
